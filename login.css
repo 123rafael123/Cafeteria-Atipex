@@ -1,0 +1,202 @@
+:root {
+  --wood: #8B4513;
+  --coffee: #4A2F1B;
+  --cream: #FFF8DC;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+              url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1947&q=80');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-container {
+  background: rgba(255, 248, 220, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.coffee-decoration {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  opacity: 0.1;
+}
+
+.top-right {
+  top: -20px;
+  right: -20px;
+  transform: rotate(45deg);
+}
+
+.bottom-left {
+  bottom: -20px;
+  left: -20px;
+  transform: rotate(-135deg);
+}
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--wood);
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  color: var(--coffee);
+  transition: all 0.3s;
+  position: relative;
+}
+
+.auth-tab.active {
+  color: var(--wood);
+  font-weight: bold;
+}
+
+.auth-tab.active:after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--wood);
+}
+
+.auth-form {
+  display: none;
+}
+
+.auth-form.show {
+  display: block;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.auth-input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 2px solid var(--wood);
+  border-radius: 4px;
+  background: white;
+  transition: all 0.3s;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: var(--coffee);
+  box-shadow: 0 0 0 2px rgba(74, 47, 27, 0.2);
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--wood);
+  color: var(--cream);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+
+.auth-btn:hover {
+  background: var(--coffee);
+  transform: translateY(-2px);
+}
+
+.brand-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--wood);
+}
+
+.brand-logo h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.brand-logo p {
+  margin: 0;
+  font-style: italic;
+  color: var(--coffee);
+}
+
+.steam {
+  animation: steaming 2s infinite;
+  opacity: 0.7;
+}
+
+@keyframes steaming {
+  0% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-10px) scale(1.2); opacity: 0.4; }
+}
+
+.social-login {
+  margin-top: 1rem;
+  text-align: center;
+  border-top: 1px solid var(--wood);
+  padding-top: 1rem;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.facebook-btn {
+  background: #4267B2;
+  color: white;
+}
+
+.google-btn {
+  background: #DB4437;
+  color: white;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.forgot-password a {
+  color: var(--coffee);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.forgot-password a:hover {
+  color: var(--wood);
+  text-decoration: underline;
+}

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<div class="cafe">
+  <nav class="nav">
+    <a href="login.html" class="nav-link">Iniciar Sesión</a>
+    <a href="principal.html" class="nav-link">Inicio</a>
+    <a href="menu.html" class="nav-link active">Menú</a>
+    <a href="nosotros.html" class="nav-link">Nosotros</a>
+    <a href="ubicaciones.html" class="nav-link">Ubicaciones</a>
+  </nav>
+
+  <header class="header">
+    <h1>☕ Bienvenido a Cafeteria Atepex ☕</h1>
+    <svg class="coffee-cup" viewBox="0 0 100 100">
+      <path d="M20,40 L80,40 L70,90 L30,90 Z" fill="black"/>
+      <path d="M80,50 Q100,50 100,70 Q100,90 80,90" fill="none" stroke="black" stroke-width="4"/>
+      <g class="steam">
+        <path d="M40,35 Q45,25 50,35" fill="none" stroke="black" stroke-width="2"/>
+        <path d="M50,35 Q55,25 60,35" fill="none" stroke="black" stroke-width="2"/>
+      </g>
+    </svg>
+    
+    <svg class="cart-icon" viewBox="0 0 100 100" onclick="toggleCart()">
+      <path d="M20,20 L30,60 L80,60 L90,30 L20,30" fill="none" stroke="black" stroke-width="4"/>
+      <circle cx="35" cy="75" r="5" fill="black"/>
+      <circle cx="75" cy="75" r="5" fill="black"/>
+    </svg>
+    <div class="cart-counter" id="cartCounter">0</div>
+    
+    <div class="cart-popup" id="cartPopup">
+      <h3>Tu Pedido</h3>
+      <div id="popup-cart-items"></div>
+      <div class="cart-total">Total: Bs. <span id="popup-cart-total">0.00</span></div>
+    </div>
+  </header>
+
+  <h2 class="section-title">Bebidas Calientes</h2>
+  <main class="menu">
+    <div class="item">
+      <div class="item-content" data-name="Espresso" data-price="24.50" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <rect x="35" y="50" width="30" height="40" fill="#4A2F1B"/>
+          <circle cx="50" cy="45" r="5" fill="#8B4513"/>
+          <path d="M40,50 Q50,40 60,50" fill="none" stroke="#8B4513" stroke-width="2" class="steam"/>
+        </svg>
+        <h2>Espresso</h2>
+        <p>Rico, intenso y perfectamente extraído</p>
+        <p>Bs. 24.50</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('Espresso')">Descripción</button>
+    </div>
+    
+    <div class="item">
+      <div class="item-content" data-name="Cappuccino" data-price="31.50" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <path d="M30,40 L70,40 L65,90 L35,90 Z" fill="#FFF8DC"/>
+          <path d="M35,40 L65,40 L63,60 L37,60 Z" fill="#8B4513"/>
+          <path d="M37,60 L63,60 L61,80 L39,80 Z" fill="#DEB887"/>
+          <path d="M40,35 Q50,25 60,35" fill="none" stroke="#FFFFFF" stroke-width="2" class="steam"/>
+        </svg>
+        <h2>Capuchino</h2>
+        <p>Partes iguales de espresso, leche vaporizada y espuma</p>
+        <p>Bs. 31.50</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('Cappuccino')">Descripción</button>
+    </div>
+    
+    <div class="item">
+      <div class="item-content" data-name="Latte" data-price="28.00" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <path d="M30,30 L70,30 L65,90 L35,90 Z" fill="#DEB887"/>
+          <path d="M35,30 L65,30 L63,50 L37,50 Z" fill="#8B4513"/>
+          <ellipse cx="50" cy="30" rx="20" ry="5" fill="#FFFFFF"/>
+          <path d="M40,25 Q50,15 60,25" fill="none" stroke="#FFFFFF" stroke-width="2" class="steam"/>
+        </svg>
+        <h2>Café con Leche</h2>
+        <p>Suave espresso con leche vaporizada</p>
+        <p>Bs. 28.00</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('Latte')">Descripción</button>
+    </div>
+    
+    <div class="item">
+      <div class="item-content" data-name="House Blend" data-price="17.50" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <path d="M30,30 L70,30 L65,90 L35,90 Z" fill="#4A2F1B"/>
+          <ellipse cx="50" cy="30" rx="20" ry="5" fill="#8B4513"/>
+          <path d="M40,25 Q50,15 60,25" fill="none" stroke="#8B4513" stroke-width="2" class="steam"/>
+        </svg>
+        <h2>Café de la Casa</h2>
+        <p>Nuestro café filtrado exclusivo</p>
+        <p>Bs. 17.50</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('House Blend')">Descripción</button>
+    </div>
+  </main>
+
+  <h2 class="section-title">Postres</h2>
+  <div class="menu">
+    <div class="item">
+      <div class="item-content" data-name="Chocolate Cake" data-price="38.50" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <path d="M20,30 L80,30 L80,80 L20,80 Z" fill="#3E1C14"/>
+          <rect x="20" y="40" width="60" height="5" fill="#8B4513"/>
+          <rect x="25" y="35" width="50" height="5" fill="#D2691E"/>
+        </svg>
+        <h2>Torta de Chocolate</h2>
+        <p>Rica torta triple de chocolate</p>
+        <p>Bs. 38.50</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('Chocolate Cake')">Descripción</button>
+    </div>
+
+    <div class="item">
+      <div class="item-content" data-name="Cheesecake" data-price="42.00" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <path d="M20,30 L80,30 L80,80 L20,80 Z" fill="#FFF8DC"/>
+          <path d="M20,30 L80,30 L80,40 L20,40 Z" fill="#DEB887"/>
+          <circle cx="50" cy="55" r="5" fill="#FF0000"/>
+        </svg>
+        <h2>Tarta de Queso</h2>
+        <p>Tarta de queso estilo New York clásica</p>
+        <p>Bs. 42.00</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('Cheesecake')">Descripción</button>
+    </div>
+
+    <div class="item">
+      <div class="item-content" data-name="Apple Pie" data-price="31.50" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <path d="M20,30 L80,30 L80,70 L20,70 Z" fill="#DEB887"/>
+          <path d="M25,35 L75,35 M25,45 L75,45 M25,55 L75,55" stroke="#8B4513" stroke-width="2"/>
+        </svg>
+        <h2>Tarta de Manzana</h2>
+        <p>Tarta de manzana casera caliente</p>
+        <p>Bs. 31.50</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('Apple Pie')">Descripción</button>
+    </div>
+
+    <div class="item">
+      <div class="item-content" data-name="Tiramisu" data-price="35.00" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <rect x="20" y="30" width="60" height="50" fill="#FFF8DC"/>
+          <rect x="20" y="40" width="60" height="10" fill="#8B4513"/>
+          <rect x="20" y="60" width="60" height="10" fill="#8B4513"/>
+        </svg>
+        <h2>Tiramisú</h2>
+        <p>Postre italiano clásico con sabor a café</p>
+        <p>Bs. 35.00</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('Tiramisu')">Descripción</button>
+    </div>
+  </div>
+
+  <h2 class="section-title">Batidos de Frutas</h2>
+  <div class="menu">
+    <div class="item">
+      <div class="item-content" data-name="Berry Blast" data-price="35.00" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <path d="M30,20 L70,20 L65,90 L35,90 Z" fill="#8B0000"/>
+          <circle cx="50" cy="40" r="10" fill="#FF0000"/>
+          <circle cx="40" cy="50" r="8" fill="#C71585"/>
+        </svg>
+        <h2>Explosión de Bayas</h2>
+        <p>Mezcla de bayas con yogur</p>
+        <p>Bs. 35.00</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('Berry Blast')">Descripción</button>
+    </div>
+
+    <div class="item">
+      <div class="item-content" data-name="Tropical Paradise" data-price="38.50" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <path d="M30,20 L70,20 L65,90 L35,90 Z" fill="#FFD700"/>
+          <circle cx="50" cy="40" r="10" fill="#FFA500"/>
+          <path d="M40,30 L60,30" stroke="#00FF00" stroke-width="2"/>
+        </svg>
+        <h2>Paraíso Tropical</h2>
+        <p>Mango, piña y coco</p>
+        <p>Bs. 38.50</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('Tropical Paradise')">Descripción</button>
+    </div>
+
+    <div class="item">
+      <div class="item-content" data-name="Green Energy" data-price="42.00" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <path d="M30,20 L70,20 L65,90 L35,90 Z" fill="#90EE90"/>
+          <circle cx="50" cy="40" r="10" fill="#32CD32"/>
+          <circle cx="40" cy="50" r="8" fill="#228B22"/>
+        </svg>
+        <h2>Energía Verde</h2>
+        <p>Espinaca, col rizada y manzana verde</p>
+        <p>Bs. 42.00</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('Green Energy')">Descripción</button>
+    </div>
+
+    <div class="item">
+      <div class="item-content" data-name="Banana Boost" data-price="35.00" onclick="addToCart(this)">
+        <svg class="drink-icon" viewBox="0 0 100 100">
+          <path d="M30,20 L70,20 L65,90 L35,90 Z" fill="#FFFFE0"/>
+          <path d="M40,30 Q50,40 60,30" fill="#FFD700"/>
+          <circle cx="50" cy="50" r="8" fill="#F0E68C"/>
+        </svg>
+        <h2>Impulso de Plátano</h2>
+        <p>Plátano, miel y leche de almendras</p>
+        <p>Bs. 35.00</p>
+      </div>
+      <button class="description-btn" onclick="showDescription('Banana Boost')">Descripción</button>
+    </div>
+  </div>
+
+  <div class="cart">
+    <h2>Tu Pedido</h2>
+    <div id="cart-items"></div>
+    <div class="cart-total">Total: Bs. <span id="cart-total">0.00</span></div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Nosotros</h3>
+        <p>Cafeteria Atepex es tu rincón acogedor para café premium, postres deliciosos y batidos refrescantes. Sirviendo sonrisas desde 2010.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contáctanos</h3>
+        <ul class="contact-info">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 100 100">
+              <path d="M50,20 L80,90 L20,90 Z" fill="none" stroke="currentColor" stroke-width="4"/>
+              <circle cx="50" cy="50" r="10" fill="currentColor"/>
+            </svg>
+            Calle Café 123, Ciudad del Café
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="4"/>
+              <path d="M30,40 C30,30 70,30 70,40 L70,70 L30,70 Z" fill="none" stroke="currentColor" stroke-width="4"/>
+            </svg>
+            info@cafeteriaatepex.com
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 100 100">
+              <path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="currentColor" stroke-width="4"/>
+              <path d="M20,40 L80,40" stroke="currentColor" stroke-width="4"/>
+            </svg>
+            (555) 123-4567
+          </li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Horarios</h3>
+        <p>Lunes - Viernes: 7:00 - 20:00</p>
+        <p>Sábado: 8:00 - 20:00</p>
+        <p>Domingo: 9:00 - 18:00</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Síguenos</h3>
+        <div class="social-links">
+          <a href="https://facebook.com" target="_blank">
+            <img src="logo-facebook.png" width="35" height="35">
+          </a>
+          <a href="https://twitter.com" target="_blank">
+            <img src="logo-twitter.png" width="35" height="35">
+          </a>
+          <a href="https://instagram.com" target="_blank">
+            <img src="logo-insta.png" width="35" height="35">
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2023 Cafeteria Atepex. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="payment-modal" id="paymentModal">
+    <button class="close-modal" onclick="closePaymentModal()">×</button>
+    <div class="payment-panel">
+      <h2>Seleccione el método de pago</h2>
+      <div class="payment-options">
+        <div class="payment-option" onclick="selectPaymentMethod('bank')">Pago con Banco</div>
+        <div class="payment-option" onclick="selectPaymentMethod('qr')">Pago con QR</div>
+      </div>
+      
+      <div class="payment-form" id="bankForm">
+        <h3>Información de Tarjeta</h3>
+        <input type="text" placeholder="Nombre en la tarjeta" required>
+        <input type="text" placeholder="Número de tarjeta" required>
+        <input type="text" placeholder="Código de seguridad" required>
+        <button class="payment-btn" onclick="processBankPayment()">Pagar</button>
+      </div>
+      
+      <div class="qr-code" id="qrCode">
+        <h3>Escanee el código QR</h3>
+        <svg viewBox="0 0 100 100" width="200" height="200">
+          <rect x="10" y="10" width="80" height="80" fill="none" stroke="black" />
+          <path d="M20,20 h20 v20 h-20 z M60,20 h20 v20 h-20 z M20,60 h20 v20 h-20 z" fill="black"/>
+          <path d="M30,30 h5 v5 h-5 z M65,30 h10 v10 h-10 z M30,65 h10 v10 h-10 z" fill="white"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleCart() {
+  const cartPopup = document.getElementById('cartPopup');
+  cartPopup.classList.toggle('show');
+}
+
+const cart = new Map();
+
+function updateCart() {
+  const cartItemsDiv = document.getElementById('cart-items');
+  const popupCartItemsDiv = document.getElementById('popup-cart-items');
+  const totalSpan = document.getElementById('cart-total');
+  const popupTotalSpan = document.getElementById('popup-cart-total');
+  
+  cartItemsDiv.innerHTML = '';
+  popupCartItemsDiv.innerHTML = '';
+  let total = 0;
+
+  cart.forEach((item, name) => {
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'cart-item';
+    itemDiv.innerHTML = `
+      <span>${name}</span>
+      <div class="cart-item-controls">
+        <span class="quantity-display">${item.quantity}</span>
+        <button class="cart-btn remove" onclick="removeItem('${name}')">Eliminar</button>
+        <span>Bs. ${(item.price * item.quantity).toFixed(2)}</span>
+      </div>
+    `;
+    
+    const popupItemDiv = itemDiv.cloneNode(true);
+    cartItemsDiv.appendChild(itemDiv);
+    popupCartItemsDiv.appendChild(popupItemDiv);
+    total += item.price * item.quantity;
+  });
+
+  if (cart.size > 0) {
+    const paymentButton = document.createElement('button');
+    paymentButton.className = 'payment-btn';
+    paymentButton.textContent = 'Proceder al Pago';
+    paymentButton.onclick = showPaymentModal;
+    cartItemsDiv.appendChild(paymentButton);
+
+    const popupPaymentButton = paymentButton.cloneNode(true);
+    popupPaymentButton.onclick = showPaymentModal;
+    popupCartItemsDiv.appendChild(popupPaymentButton);
+
+    const clearButton = document.createElement('button');
+    clearButton.className = 'cart-btn clear';
+    clearButton.textContent = 'Vaciar Carrito';
+    clearButton.onclick = clearCart;
+    cartItemsDiv.appendChild(clearButton);
+    
+    const popupClearButton = clearButton.cloneNode(true);
+    popupClearButton.onclick = clearCart;
+    popupCartItemsDiv.appendChild(popupClearButton);
+  }
+
+  totalSpan.textContent = total.toFixed(2);
+  popupTotalSpan.textContent = total.toFixed(2);
+  
+  const cartCounter = document.getElementById('cartCounter');
+  let totalItems = 0;
+  cart.forEach(item => totalItems += item.quantity);
+  cartCounter.textContent = totalItems;
+  cartCounter.style.display = totalItems > 0 ? 'flex' : 'none';
+}
+
+function removeItem(name) {
+  cart.delete(name);
+  updateCart();
+}
+
+function clearCart() {
+  cart.clear();
+  updateCart();
+}
+
+function addToCart(element) {
+  const name = element.dataset.name;
+  const price = parseFloat(element.dataset.price);
+
+  if (cart.has(name)) {
+    const currentItem = cart.get(name);
+    currentItem.quantity += 1;
+    cart.set(name, currentItem);
+  } else {
+    cart.set(name, { price, quantity: 1 });
+  }
+
+  element.style.backgroundColor = '#FFF8DC';
+  setTimeout(() => {
+    element.style.backgroundColor = 'white';
+  }, 200);
+
+  updateCart();
+}
+
+document.addEventListener('click', (event) => {
+  const cartPopup = document.getElementById('cartPopup');
+  const cartIcon = document.querySelector('.cart-icon');
+  
+  if (!cartPopup.contains(event.target) && !cartIcon.contains(event.target)) {
+    cartPopup.classList.remove('show');
+  }
+});
+
+function updatePaymentButton() {
+  const paymentBtn = document.querySelector('.payment-btn');
+  paymentBtn.classList.toggle('show', cart.size > 0);
+}
+
+function showPaymentModal() {
+  document.getElementById('paymentModal').classList.add('show');
+}
+
+function closePaymentModal() {
+  document.getElementById('paymentModal').classList.remove('show');
+  document.getElementById('bankForm').classList.remove('show');
+  document.getElementById('qrCode').classList.remove('show');
+  document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('active'));
+}
+
+function selectPaymentMethod(method) {
+  document.querySelectorAll('.payment-option').forEach(opt => {
+    opt.classList.remove('active');
+  });
+  const selectedOption = document.querySelector(`.payment-option:nth-child(${method === 'bank' ? '1' : '2'})`);
+  selectedOption.classList.add('active');
+  
+  document.getElementById('bankForm').classList.toggle('show', method === 'bank');
+  document.getElementById('qrCode').classList.toggle('show', method === 'qr');
+}
+
+function processBankPayment() {
+  alert('Pago procesado exitosamente');
+  cart.clear();
+  updateCart();
+  closePaymentModal();
+}
+
+function showDescription(productName) {
+  const descriptions = {
+    'Espresso': {
+      title: 'Espresso',
+      description: 'Nuestro espresso se prepara con granos selectos de café arábica, tostados a la perfección. El proceso de extracción dura exactamente 25 segundos bajo 9 bares de presión, resultando en una crema dorada y un sabor intenso con notas de chocolate negro y avellanas tostadas.',
+      svg: `<svg viewBox="0 0 200 200">
+        <rect x="70" y="100" width="60" height="80" fill="#4A2F1B"/>
+        <circle cx="100" cy="90" r="10" fill="#8B4513"/>
+        <path d="M80,100 Q100,80 120,100" fill="none" stroke="#8B4513" stroke-width="4" class="steam"/>
+      </svg>`
+    },
+    'Cappuccino': {
+      title: 'Capuchino',
+      description: 'Un equilibrio perfecto de espresso, leche vaporizada y espuma de leche en proporciones iguales. La leche se calienta a 65°C para lograr una textura sedosa. Decorado con un delicado arte latte que realza la experiencia visual y gustativa.',
+      svg: `<svg viewBox="0 0 200 200">
+        <path d="M60,80 L140,80 L130,180 L70,180 Z" fill="#FFF8DC"/>
+        <path d="M70,80 L130,80 L125,120 L75,120 Z" fill="#8B4513"/>
+        <path d="M80,50 Q100,30 120,50" fill="none" stroke="#8B4513" stroke-width="4" class="steam"/>
+      </svg>`
+    },
+    'Latte': {
+      title: 'Café con Leche',
+      description: 'Suave espresso con leche vaporizada, ideal para quien busca un sabor más cremoso y suave en cada sorbo.',
+      svg: `<svg viewBox="0 0 200 200">
+        <rect x="70" y="100" width="60" height="80" fill="#DEB887"/>
+        <circle cx="100" cy="90" r="10" fill="#8B4513"/>
+        <path d="M80,100 Q100,80 120,100" fill="none" stroke="#8B4513" stroke-width="4" class="steam"/>
+      </svg>`
+    },
+    'House Blend': {
+      title: 'Café de la Casa',
+      description: 'Nuestro café filtrado exclusivo, con un sabor suave y agradable que resalta las notas de caramelo y nuez.',
+      svg: `<svg viewBox="0 0 200 200">
+        <rect x="70" y="100" width="60" height="80" fill="#4A2F1B"/>
+        <circle cx="100" cy="90" r="10" fill="#8B4513"/>
+        <path d="M80,100 Q100,80 120,100" fill="none" stroke="#8B4513" stroke-width="4" class="steam"/>
+      </svg>`
+    },
+    'Chocolate Cake': {
+      title: 'Torta de Chocolate',
+      description: 'Rica torta triple de chocolate, con una textura húmeda y un intenso sabor a chocolate.',
+      svg: `<svg viewBox="0 0 200 200">
+        <rect x="70" y="100" width="60" height="80" fill="#3E1C14"/>
+        <rect x="70" y="100" width="60" height="10" fill="#8B4513"/>
+        <rect x="70" y="90" width="60" height="10" fill="#D2691E"/>
+      </svg>`
+    },
+    'Cheesecake': {
+      title: 'Tarta de Queso',
+      description: 'Tarta de queso estilo New York clásica, cremosa y con una base de galleta crujiente.',
+      svg: `<svg viewBox="0 0 200 200">
+        <rect x="70" y="100" width="60" height="80" fill="#FFF8DC"/>
+        <rect x="70" y="100" width="60" height="10" fill="#D2691E"/>
+      </svg>`
+    },
+    'Apple Pie': {
+      title: 'Tarta de Manzana',
+      description: 'Tarta de manzana casera caliente, con un irresistible aroma de canela y una corteza crujiente.',
+      svg: `<svg viewBox="0 0 200 200">
+        <rect x="70" y="100" width="60" height="80" fill="#DEB887"/>
+        <circle cx="100" cy="90" r="10" fill="#8B4513"/>
+      </svg>`
+    },
+    'Tiramisu': {
+      title: 'Tiramisú',
+      description: 'Postre italiano clásico con sabor a café, capas de galleta empapada en café y mascarpone.',
+      svg: `<svg viewBox="0 0 200 200">
+        <rect x="70" y="100" width="60" height="80" fill="#FFF8DC"/>
+        <rect x="70" y="100" width="60" height="10" fill="#8B4513"/>
+      </svg>`
+    },
+    'Berry Blast': {
+      title: 'Explosión de Bayas',
+      description: 'Mezcla refrescante de bayas con yogur, ideal para los días calurosos.',
+      svg: `<svg viewBox="0 0 200 200">
+        <rect x="70" y="100" width="60" height="80" fill="#8B0000"/>
+        <circle cx="100" cy="90" r="10" fill="#FF0000"/>
+      </svg>`
+    },
+    'Tropical Paradise': {
+      title: 'Paraíso Tropical',
+      description: 'Una mezcla exótica de mango, piña y coco, que te transportará a la playa.',
+      svg: `<svg viewBox="0 0 200 200">
+        <rect x="70" y="100" width="60" height="80" fill="#FFD700"/>
+        <circle cx="100" cy="90" r="10" fill="#FFA500"/>
+      </svg>`
+    },
+    'Green Energy': {
+      title: 'Energía Verde',
+      description: 'Un batido revitalizante de espinaca, col rizada y manzana verde.',
+      svg: `<svg viewBox="0 0 200 200">
+        <rect x="70" y="100" width="60" height="80" fill="#90EE90"/>
+        <circle cx="100" cy="90" r="10" fill="#32CD32"/>
+      </svg>`
+    },
+    'Banana Boost': {
+      title: 'Impulso de Plátano',
+      description: 'Batido cremoso de plátano, miel y leche de almendras, perfecto para un desayuno rápido.',
+      svg: `<svg viewBox="0 0 200 200">
+        <rect x="70" y="100" width="60" height="80" fill="#FFFFE0"/>
+        <circle cx="100" cy="90" r="10" fill="#FFD700"/>
+      </svg>`
+    },
+  };
+
+  const info = descriptions[productName];
+  if (!info) return;
+
+  const modal = document.createElement('div');
+  modal.className = 'description-modal';
+  modal.innerHTML = `
+    <div class="description-panel">
+      <button class="close-modal" onclick="this.closest('.description-modal').remove()">×</button>
+      <h2>${info.title}</h2>
+      <div class="product-image">
+        ${info.svg}
+      </div>
+      <div class="product-description">
+        ${info.description}
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  setTimeout(() => modal.classList.add('show'), 10);
+}
+</script>
+</body>
+</html>

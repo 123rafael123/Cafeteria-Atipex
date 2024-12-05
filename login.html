@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="login.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="brand-logo">
+      <h1>☕ CAFETERÍA ATIPEX</h1>
+      <p>Donde cada sorbo cuenta una historia</p>
+      <svg width="100" height="100" viewBox="0 0 100 100">
+        <path d="M30,40 L70,40 L65,90 L35,90 Z" fill="var(--wood)"/>
+        <path d="M40,35 Q50,25 60,35" fill="none" stroke="var(--wood)" stroke-width="2" class="steam"/>
+      </svg>
+    </div>
+  
+    <svg class="coffee-decoration top-right" viewBox="0 0 100 100">
+      <path d="M30,40 L70,40 L65,90 L35,90 Z" fill="var(--wood)"/>
+      <path d="M40,35 Q50,25 60,35" fill="none" stroke="var(--wood)" stroke-width="2" class="steam"/>
+    </svg>
+    
+    <svg class="coffee-decoration bottom-left" viewBox="0 0 100 100">
+      <path d="M30,40 L70,40 L65,90 L35,90 Z" fill="var(--wood)"/>
+      <path d="M40,35 Q50,25 60,35" fill="none" stroke="var(--wood)" stroke-width="2" class="steam"/>
+    </svg>
+  
+    <div class="auth-tabs">
+      <div class="auth-tab active" onclick="switchTab('login')">Iniciar Sesión</div>
+      <div class="auth-tab" onclick="switchTab('signup')">Registrarse</div>
+    </div>
+    
+    <form class="auth-form show" id="loginForm" onsubmit="handleLogin(event)">
+      <input type="email" class="auth-input" placeholder="Correo electrónico" required>
+      <input type="password" class="auth-input" placeholder="Contraseña" required>
+      <div class="forgot-password">
+        <a href="javascript:void(0)" onclick="showRecoveryForm()">¿Olvidaste tu contraseña?</a>
+      </div>
+      <button type="submit" class="auth-btn">Iniciar Sesión</button>
+      <div class="social-login">
+        <a href="https://facebook.com" class="social-btn facebook-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" style="margin-right: 8px;">
+            <path fill="currentColor" d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/>
+          </svg>
+          Facebook
+        </a>
+        <a href="https://accounts.google.com" class="social-btn google-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" style="margin-right: 8px;">
+            <path fill="currentColor" d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.2,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.1,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.25,22C17.6,22 21.5,18.33 21.5,12.91C21.5,11.76 21.35,11.1 21.35,11.1Z"/>
+          </svg>
+          Google
+        </a>
+      </div>
+    </form>
+    
+    <form class="auth-form" id="signupForm" onsubmit="handleSignup(event)">
+      <input type="text" class="auth-input" placeholder="Nombre completo" required>
+      <input type="email" class="auth-input" placeholder="Correo electrónico" required>
+      <input type="password" class="auth-input" placeholder="Contraseña" required>
+      <input type="password" class="auth-input" placeholder="Confirmar contraseña" required>
+      <button type="submit" class="auth-btn">Registrarse</button>
+    </form>
+  
+    <form class="auth-form" id="recoveryForm" style="display: none;">
+      <input type="email" class="auth-input" placeholder="Correo electrónico" required>
+      <button type="submit" class="auth-btn" onclick="handleRecovery(event)">Recuperar Contraseña</button>
+      <button type="button" class="auth-btn" onclick="switchTab('login')" style="background: var(--coffee); margin-top: 0.5rem;">Volver</button>
+    </form>
+  </div>
+  
+  <script>
+  if (!localStorage.getItem('users')) {
+    localStorage.setItem('users', JSON.stringify([]));
+  }
+  
+  function switchTab(tab) {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('show'));
+    
+    if (tab === 'login') {
+      document.querySelector('.auth-tab:first-child').classList.add('active');
+      document.getElementById('loginForm').classList.add('show');
+      document.getElementById('recoveryForm').style.display = 'none';
+    } else {
+      document.querySelector('.auth-tab:last-child').classList.add('active');
+      document.getElementById('signupForm').classList.add('show');
+      document.getElementById('recoveryForm').style.display = 'none';
+    }
+  }
+  
+  function showRecoveryForm() {
+    document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('show'));
+    document.getElementById('recoveryForm').style.display = 'block';
+  }
+  
+  function handleRecovery(event) {
+    event.preventDefault();
+    const email = event.target.querySelector('[type="email"]').value;
+    alert(`Se ha enviado un correo de recuperación a ${email}`);
+    switchTab('login');
+  }
+  
+  function handleLogin(event) {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.querySelector('[type="email"]').value;
+    const password = form.querySelector('[type="password"]').value;
+  
+    const users = JSON.parse(localStorage.getItem('users'));
+    const user = users.find(u => u.email === email && u.password === password);
+  
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      alert('¡Inicio de sesión exitoso!');
+      window.location.href = '/principal.html';
+    } else {
+      alert('Correo electrónico o contraseña incorrectos');
+    }
+  }
+  
+  function handleSignup(event) {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.querySelector('[placeholder="Nombre completo"]').value;
+    const email = form.querySelector('[type="email"]').value;
+    const password = form.querySelector('[placeholder="Contraseña"]').value;
+    const confirmPassword = form.querySelector('[placeholder="Confirmar contraseña"]').value;
+  
+    if (password !== confirmPassword) {
+      alert('Las contraseñas no coinciden');
+      return;
+    }
+  
+    const users = JSON.parse(localStorage.getItem('users'));
+    if (users.some(u => u.email === email)) {
+      alert('Este correo electrónico ya está registrado');
+      return;
+    }
+  
+    users.push({ name, email, password });
+    localStorage.setItem('users', JSON.stringify(users));
+    alert('¡Registro exitoso! Por favor inicia sesión');
+    switchTab('login');
+    form.reset();
+  }
+  </script>
+</body>
+</html> 

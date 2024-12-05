@@ -1,0 +1,328 @@
+<html><head><base href="/" />
+    <style>
+    :root {
+      --wood: #8B4513;
+      --coffee: #4A2F1B;
+      --cream: #FFF8DC;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: var(--cream);
+    }
+    
+    .cafe {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.nav {
+  background: var(--wood);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.nav a:nth-child(2) {
+  margin-right: 2rem; 
+}
+
+.nav-link {
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: var(--cream);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover:before {
+  width: 100%;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  background: rgba(255,255,255,0.2);
+}
+    
+    .footer {
+      background-color: var(--wood);
+      color: var(--cream);
+      padding: 2rem 0;
+      margin-top: auto;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 0 1rem;
+    }
+    
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .contact-info {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .contact-info li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .social-icon {
+      width: 30px;
+      height: 30px;
+      color: var(--cream);
+      transition: color 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      color: var(--coffee);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .about-section {
+      padding: 4rem 2rem;
+      background: linear-gradient(45deg, rgba(139, 69, 19, 0.05), rgba(255, 248, 220, 0.1));
+    }
+    
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+    
+    .about-image {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+    
+    .about-image:hover {
+      transform: perspective(1000px) rotateY(10deg);
+    }
+    
+    .about-image img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .about-content {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .about-title {
+      color: var(--coffee);
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .about-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--wood);
+    }
+    
+    .about-text {
+      color: var(--coffee);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .stat-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      color: var(--wood);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      color: var(--coffee);
+      font-size: 0.9rem;
+    }
+    </style>
+    </head><body>
+    <div class="cafe">
+      <nav class="nav">
+        <a href="login.html" class="nav-link">Iniciar Sesión</a>
+        <a href="principal.html" class="nav-link">Inicio</a>
+        <a href="menu.html" class="nav-link active">Menú</a>
+        <a href="nosotros.html" class="nav-link">Nosotros</a>
+        <a href="ubicaciones.html" class="nav-link">Ubicaciones</a>
+      </nav>
+    
+      <section class="about-section">
+        <div class="about-container">
+          <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" 
+                 alt="Interior de Cafeteria Atepex">
+          </div>
+          <div class="about-content">
+            <h1 class="about-title">Nuestra Historia</h1>
+            <p class="about-text">
+              Desde el 2024 Atipex fue una cafeteria creada por una universitaria con el fin de hacer que las personas disfruten el tomar cafe. Somos un espacio donde te sentiras comodamente con un entorno antiguo para mejorar la experiencia.
+            </p>
+            <p class="about-text">
+              Nuestro compromiso con la excelencia es seleccionar cuidadosamente los granos del cafe y la elaboracion de masitas y postres ademas de traer bebidas artesanales hecha por nuestro chef profesional comprometido a que sea saludable para los demas.
+
+            </p>
+            <div class="stats-container">
+              <div class="stat-item">
+                <div class="stat-number">13+</div>
+                <div class="stat-label">Años de Experiencia</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">0.1k+</div>
+                <div class="stat-label">Clientes Felices</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Variedades de Café</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Nosotros</h3>
+            <p>Cafeteria Atepex es tu rincón acogedor para café premium, postres deliciosos y batidos refrescantes. Sirviendo sonrisas desde 2010.</p>
+          </div>
+          
+          <div class="footer-section">
+            <h3>Contáctanos</h3>
+            <ul class="contact-info">
+              <li>
+                <svg width="20" height="20" viewBox="0 0 100 100">
+                  <path d="M50,20 L80,90 L20,90 Z" fill="none" stroke="currentColor" stroke-width="4"/>
+                  <circle cx="50" cy="50" r="10" fill="currentColor"/>
+                </svg>
+                Calle Café 123, Ciudad del Café
+              </li>
+              <li>
+                <svg width="20" height="20" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="4"/>
+                  <path d="M30,40 C30,30 70,30 70,40 L70,70 L30,70 Z" fill="none" stroke="currentColor" stroke-width="4"/>
+                </svg>
+                info@cafeteriaatepex.com
+              </li>
+              <li>
+                <svg width="20" height="20" viewBox="0 0 100 100">
+                  <path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="currentColor" stroke-width="4"/>
+                  <path d="M20,40 L80,40" stroke="currentColor" stroke-width="4"/>
+                </svg>
+                (555) 123-4567
+              </li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h3>Horarios</h3>
+            <p>Lunes - Viernes: 7:00 - 20:00</p>
+            <p>Sábado: 8:00 - 20:00</p>
+            <p>Domingo: 9:00 - 18:00</p>
+          </div>
+          
+          <div class="footer-section">
+            <h3>Síguenos</h3>
+            <div class="social-links">
+              <a href="https://facebook.com" target="_blank">
+                <img src="logo-facebook.png" width="35" height="35">
+              </a>
+              <a href="https://twitter.com" target="_blank">
+                <img src="logo-twitter.png" width="35" height="35">
+              </a>
+              <a href="https://instagram.com" target="_blank">
+                <img src="logo-insta.png" width="35" height="35">
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2023 Cafeteria Atepex. Todos los derechos reservados.</p>
+        </div>
+      </footer>
+    </div>
+    </body></html>

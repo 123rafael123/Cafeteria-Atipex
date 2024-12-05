@@ -1,0 +1,480 @@
+<html><head><base href="/" /><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+  :root {
+    --wood: #8B4513;
+    --coffee: #4A2F1B;
+    --cream: #FFF8DC;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: var(--cream);
+  }
+  
+  .cafe {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .nav {
+    background: var(--wood);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    height: 70px;
+  }
+  
+  .nav a:nth-child(2) {
+    margin-right: 2rem;
+  }
+  
+  .nav-link {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .nav-link:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--cream);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover:before {
+    width: 100%;
+  }
+  
+  .nav-link:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+    color: white;
+  }
+  
+  .nav-link.active {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .header {
+    margin-top: 0;
+  }
+
+  
+  .footer {
+    background: var(--wood);
+    color: white;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+  
+  .footer-section {
+    padding: 1rem;
+  }
+  
+  .footer-section h3 {
+    color: var(--cream);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s;
+  }
+  
+  .social-icon:hover {
+    transform: scale(1.1);
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--cream);
+    color: var(--cream);
+  }
+  
+  .contact-info {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .contact-info li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .footer a {
+    color: var(--cream);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .footer a:hover {
+    color: #FFF;
+  }
+  
+  .cart-counter {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #d32f2f;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .hero-section {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+  }
+  
+  .card-hover {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+    transition: transform 0.3s ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-10px);
+  }
+  
+  .card-front,
+  .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease;
+  }
+  
+  .card-hover:hover .card-front {
+    transform: rotateY(180deg);
+  }
+  
+  .card-hover:hover .card-back {
+    transform: rotateY(0deg);
+  }
+  
+  .card-back {
+    background: var(--wood);
+    color: var(--cream);
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  .scroll-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+  }
+  
+  .scroll-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .carousel-item {
+    height: 400px;
+  }
+  
+  .carousel-item img {
+    object-fit: cover;
+    height: 100%;
+  }
+  
+  .mini-carousel {
+    height: 200px;
+  }
+  
+  .mini-carousel .carousel-item {
+    height: 200px;
+  }
+  
+  </style></head><body>
+  <div class="cafe">
+    <nav class="nav">
+      <a href="login.html" class="nav-link">Iniciar Sesión</a>
+      <a href="principal.html" class="nav-link">Inicio</a>
+      <a href="menu.html" class="nav-link active">Menú</a>
+      <a href="nosotros.html" class="nav-link">Nosotros</a>
+      <a href="ubicaciones.html" class="nav-link">Ubicaciones</a>
+    </nav>
+    <main>
+      <section class="hero-section">
+        <div class="container">
+          <h1 class="display-1 mb-4">Cafeteria Atepex</h1>
+          <p class="lead">Tu lugar favorito para disfrutar del mejor café</p>
+        </div>
+      </section>
+      <section class="container my-5 scroll-section">
+        <h2 class="text-center mb-4">Nuestros Productos Destacados</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card card-hover">
+              <div class="card-front">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085" class="card-img-top h-100" alt="Café">
+              </div>
+              <div class="card-back">
+                <div class="text-center">
+                  <h3>Café Premium</h3>
+                  <p>Nuestro café es seleccionado de los mejores granos, tostado a la perfección.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-hover">
+              <div class="card-front">
+                <img src="postres.jpg" class="card-img-top h-100" alt="Postres">
+              </div>
+              <div class="card-back">
+                <div class="text-center">
+                  <h3>Postres Artesanales</h3>
+                  <p>Deliciosos postres hechos diariamente con ingredientes frescos y naturales.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-hover">
+              <div class="card-front">
+                <img src="bebidas.jpg" class="card-img-top h-100" alt="Bebidas">
+              </div>
+              <div class="card-back">
+                <div class="text-center">
+                  <h3>Bebidas Especiales</h3>
+                  <p>Descubre nuestra variedad de bebidas frías y calientes preparadas por expertos baristas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid p-0 scroll-section">
+        <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085" class="d-block w-100" alt="Café">
+              <div class="carousel-caption">
+                <h3>Experiencia Única</h3>
+                <p>Disfruta de nuestro ambiente acogedor</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb" class="d-block w-100" alt="Ambiente">
+              <div class="carousel-caption">
+                <h3>Ambiente Acogedor</h3>
+                <p>El lugar perfecto para relajarte</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31" class="d-block w-100" alt="Postres">
+              <div class="carousel-caption">
+                <h3>Dulces Momentos</h3>
+                <p>Prueba nuestros deliciosos postres</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </section>
+  
+      <!-- Mini Carousels -->
+      <section class="container my-5">
+        <div class="row">
+          <!-- Mini carousel 1 -->
+          <div class="col-md-3">
+            <div class="mini-carousel carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085" class="d-block w-100" alt="Mini 1">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93" class="d-block w-100" alt="Mini 2">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Mini carousel 2 -->
+          <div class="col-md-3">
+            <div class="mini-carousel carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="foto1.jpg" class="d-block w-100" alt="Mini 3">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31" class="d-block w-100" alt="Mini 4">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Mini carousel 3 -->
+          <div class="col-md-3">
+            <div class="mini-carousel carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb" class="d-block w-100" alt="Mini 5">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571" class="d-block w-100" alt="Mini 6">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Mini carousel 4 -->
+          <div class="col-md-3">
+            <div class="mini-carousel carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="foto6.jpg" class="d-block w-100" alt="Mini 7">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085" class="d-block w-100" alt="Mini 8">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Nosotros</h3>
+          <p>Cafeteria Atepex es tu rincón acogedor para café premium, postres deliciosos y batidos refrescantes. Sirviendo sonrisas desde 2010.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Contáctanos</h3>
+          <ul class="contact-info">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 100 100">
+                <path d="M50,20 L80,90 L20,90 Z" fill="none" stroke="currentColor" stroke-width="4"/>
+                <circle cx="50" cy="50" r="10" fill="currentColor"/>
+              </svg>
+              Calle Café 123, Ciudad del Café
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="4"/>
+                <path d="M30,40 C30,30 70,30 70,40 L70,70 L30,70 Z" fill="none" stroke="currentColor" stroke-width="4"/>
+              </svg>
+              info@cafeteriaatepex.com
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 100 100">
+                <path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="currentColor" stroke-width="4"/>
+                <path d="M20,40 L80,40" stroke="currentColor" stroke-width="4"/>
+              </svg>
+              (555) 123-4567
+            </li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Horarios</h3>
+          <p>Lunes - Viernes: 7:00 - 20:00</p>
+          <p>Sábado: 8:00 - 20:00</p>
+          <p>Domingo: 9:00 - 18:00</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Síguenos</h3>
+          <div class="social-links">
+            <a href="https://facebook.com" target="_blank">
+              <img src="logo-facebook.png" width="35" height="35">
+            </a>
+            <a href="https://twitter.com" target="_blank">
+              <img src="logo-twitter.png" width="35" height="35">
+            </a>
+            <a href="https://instagram.com" target="_blank">
+              <img src="logo-insta.png" width="35" height="35">
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2023 Cafeteria Atepex. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+  
+  document.querySelectorAll('.scroll-section').forEach((section) => {
+    observer.observe(section);
+  });
+  </script>
+  </body></html>
